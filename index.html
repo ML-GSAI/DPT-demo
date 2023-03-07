@@ -27,39 +27,38 @@
 </div>
 <div class="content">
   <h2 style="text-align:center;">Abstract</h2>
-  <p>We propose a three-stage training strategy called dual pseudo training (DPT) for conditional image generation and classification in semi-supervised learning. First, a classifier is trained on partially labeled data and predicts pseudo labels for all data. Second, a conditional generative model is trained on all data with pseudo labels and generates pseudo images given labels. Finally, the classifier is trained on real data augmented by pseudo images with labels. We demonstrate largescale diffusion models and semi-supervised learners benefit mutually with a few labels via DPT. In particular, on the ImageNet 256×256 generation benchmark, DPT can generate realistic, diverse, and semantically correct images with very few labels. With two (i.e., < 0.2%) and five (i.e., < 0.4%) labels per class, DPT achieves an FID of 3.44 and 3.37 respectively, outperforming strong diffusion models with full labels, such as IDDPM, CDM, ADM, and LDM. Besides, DPT outperforms competitive semi-supervised baselines substantially on ImageNet classification benchmarks with one, two, and five labels per class, achieving state-of-the-art top-1 accuracies of 59.0 (+2.8), 69.5 (+3.0), and 73.6 (+1.2) respectively.
+  <p>We propose a three-stage training strategy called <b>dual pseudo training (DPT)</b> for conditional image generation and classification in semi-supervised learning. First, a classifier is trained on partially labeled data and predicts pseudo labels for all data. Second, a conditional generative model is trained on all data with pseudo labels and generates pseudo images given labels. Finally, the classifier is trained on real data augmented by pseudo images with labels. We demonstrate large scale diffusion models and semi-supervised learners benefit mutually with a few labels via DPT. In particular, on the ImageNet 256×256 generation benchmark, DPT can generate realistic, diverse, and semantically correct images with very few labels. With <b>two (i.e., < 0.2%) and five (i.e., < 0.4%)</b> labels per class, DPT achieves an FID of <b>3.44 and 3.37</b> respectively, outperforming strong diffusion models with <b>full labels</b>, such as IDDPM, CDM, ADM, and LDM. Besides, DPT outperforms competitive semi-supervised baselines substantially on ImageNet classification benchmarks with <b>one, two, and five</b> labels per class, achieving state-of-the-art top-1 accuracies of <b>59.0 (+2.8), 69.5 (+3.0), and 73.6 (+1.2)</b> respectively.
     </p>
 </div>
 <div class="content">
 
   <h2>An overview of DPT</h2>
   <img class="summary-img" src="./ptp_files/overview.png" style="width:100%;">
-  <p> First, a (self-supervised) classifier is trained on partially labeled data and used to predict pseudo labels
-    for all data. Second, a (diffusion-based) conditional generative model is trained on all data with pseudo labels and used to generate pseudo
-    images given random labels. Finally, the classifier is trained or fine-tuned on real data augmented by pseudo images with labels.</p>
+  <p> <b>First</b>, a (self-supervised) classifier is trained on partially labeled data and used to predict pseudo labels
+    for all data. <b>Second</b>, a (diffusion-based) conditional generative model is trained on all data with pseudo labels and used to generate pseudo
+    images given random labels. <b>Finally</b>, the classifier is trained or fine-tuned on real data augmented by pseudo images with labels.</p>
      <br>
   <br>
 </div>
 <div class="content">
-  <h2>Image generation results on ImageNet 256×256</h2>
+  <h1>Generation and classification results of DPT on ImageNet with few labels</h1>
+  <h2>DPT with <b>< 0.4%</b> labels vs. supervised diffusion models</h2>
+  <img class="summary-img" src="./ptp_files/fid.jpg" style="width:100%;">
   <p>
-    We present the gap of FID between DPT and the supervised baseline in parentheses. With < 0.4% labels, DPT outperforms strong conditional generative models with full labels, including CDM (Ho et al., 2022), ADM (Dhariwal & Nichol, 2021) and LDM (Rombach et al., 2022).
+    DPT with <b>< 0.4%</b> labels outperforms strong supervised diffusion models, including <a href="https://arxiv.org/abs/2106.15282" target="_blank">CDM(Ho et al., 2022)</a>, <a href="https://arxiv.org/abs/2105.05233" target="_blank">ADM(Dhariwal & Nichol, 2021)</a> and <a href="https://arxiv.org/abs/2112.10752" target="_blank">LDM(Rombach et al., 2022).</a> <b>The bubble area</b> indicates the label fraction.
   </p>
-  <img class="summary-img" src="./ptp_files/generation.png" style="width:100%;">
     
-  <h2>Top-1 accuracy on the ImageNet validation set with few labels. </h2>
+  <h2>DPT vs. SOTA semi-supervised classifiers</h2>
   <p>
-    We present the gain of DPT over the corresponding baseline in parentheses. With one, two, five labels per class, DPT improves the state-of-the-art semi-supervised learner MSN(Assran et al., 2022) consistently and substantially.
-
+    With <b>one, two, five</b> labels per class, DPT improves the state-of-the-art semi-supervised learner <a href="https://arxiv.org/abs/2204.07141" target="_blank">MSN(Assran et al., 2022)</a> consistently and substantially.
   </p>
-  <img class="summary-img" src="./ptp_files/classification.png" style="width:100%;">
+  <img class="summary-img" src="./ptp_files/accuracy.jpg" style="width:100%;">
 
 </div>
 <div class="content">
-  <h2>More random samples in specific classes from DPT</h2>
-  <img class="summary-img" src="./ptp_files/more_samples.png" style="width:100%;">
-  <h2>Random samples by varying the number of real labels in the first stage.</h2>
+  <h2>Random samples by varying the number of real labels in the first stage</h2>
   <p>More real labels result in smaller noise in pseudo labels and samples of better visual quality and correct semantics. Top: “Custard apple”. Middle: “Geyser”. Bottom: “Goldfish”.</p>
+  <p>For a given class <b>y</b>, the precision and recall w.r.t. the classifier is defined by <b>P = TP/(TP + FP)</b> and <b>R = TP/(TP + FN)</b>, where TP, FP, and FN denote the number of true positive, false positive, and false negative samples respectively.</p>
   <img class="summary-img" src="./ptp_files/range_samples.png" style="width:100%;">
 </div>
 <div class="content">
